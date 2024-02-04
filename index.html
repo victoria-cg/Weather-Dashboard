@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Weather Dashboard</title>
+  <!--Need to call bootstrap stylesheet here if using-->
+  <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+</head>
+<body>
+    <!--need container/element for header-->
+    <header>
+        <h1>Weather Dashboard</h1>
+    </header>
+    <!--div container for city search form, button to submit, and dynamic/persistiing buttons for previously searched cities stored in localStorage-->
+    <div class="form-container">
+        <input type="text" class="form-input" name="city-name" placeholder="Enter city name"/> <!--input is the search box to submit the city name-->
+        <button id="search-button">Search</button> <!--Button is the search button to submit the city name into the form-->
+    </div>
+    <!--Div container for current city name and weather conditions-->
+    <div class="current-conditions"></div>
+    <!--Div container for 5 day forecast of selected city-->
+    <div class="5-day-forecast"></div>
+    <!--need to call bootstrap script tag here if using-->
+    <script type="text/javascript" src="./assets/js/script.js"></script>
+</body>
+</html>
+
+
+<!--Need container for header*/
+//need container for search menu
+//need container for dashboard icons: sub containers for city header/info and 5 day forecast
+//need form on HTML side for accepting user data? Or use jquery to inject the forms?Dynamically insert elements with JS, see class activity 6.9 and 6.10, see activity 5.5 Insert form elements with jquery (can do with vanilla JS, see 6.9 and 6.10 use document.getelementbyID to select the input field from HTML to use in your variable)
+-use input element for form to submit city names, use placeholder attribute to set ‘city name’ inside of text box to prompt user to enter text there
+
+//need to add class attributes with bootstrap information, but also add to CSS?: review how to use bootstrap
+-->
