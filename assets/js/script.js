@@ -12,7 +12,7 @@ function getApi() {
     console.log(city)
     //variable for the API call to Geocode the city name into coordinates below 
     //is it required to add state and country codes too to get geocode API to work?
-    //limit parameter in request URL is set to 1 to only return 1 city by the requested name
+    //limit parameter in request URL is set to =1 to only return 1 city by the requested name
     var requestUrlGeocode = 'http://api.openweathermap.org/geo/1.0/direct?q=' + city + '&limit=1&appid=' + apiKey;
 
 //function to request geocode data for city name, parse data from returned json 
@@ -29,10 +29,13 @@ function getApi() {
         console.log(latitude);
         var longitude = data[i].lon;
         console.log(longitude);
-      } 
+        //TO DO FOR SETTNG STORAGE OF CITIES figure out if the city name is available and saveToStorage(data.city)
+        //must add logic mentioned above for asking if city name is available so that non-city names entered in box won't be saved
+      }
     });
-    
-//make variable for the forescast API requestURL
+
+    //make variable for the forecast API requestURL
+var requestUrlForecast = 'api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}'
 //fetch the forecast request URL using the longitude and latitude variables to get the forecast data
 // need to dynamically update HTML by appending elements for the current weather and for the 5 day forecast
 //need to use variables for cities (and states if used?) to store their names in localStorage to persist their data on screen
@@ -49,5 +52,6 @@ searchButton.addEventListener('click', getApi);
 //-run ‘fetch(queryURL) to fetch the data from the URL variable with its modified parameters we just made
 //use a for  loop to log/display the data for each city’s data retrieved by the API? Like in example 6.7
 //Dynamically insert the elements for the content that you want to select from the API data array, and then append those to the page. See class activities 6.9 and 6.10
+
 
 //Use localStorage to store the cities already searched for
