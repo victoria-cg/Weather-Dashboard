@@ -29,16 +29,38 @@ function getApi() {
         console.log(latitude);
         var longitude = data[i].lon;
         console.log(longitude);
+        
         //TO DO FOR SETTNG STORAGE OF CITIES figure out if the city name is available and saveToStorage(data.city)
         //must add logic mentioned above for asking if city name is available so that non-city names entered in box won't be saved
+        //function below gets forecast for city based on coordinates
+        var requestUrlForecast = 'http://api.openweathermap.org/data/2.5/forecast?lat=' + latitude + '&lon=' + longitude + '&appid=' + apiKey;
+        //fetch the forecast request URL 
+        fetch(requestUrlForecast)
+            .then(function (response) {
+              return response.json();
+            })
+            .then(function (data) {
+              console.log(data);
+               for (var i = 0; i < data.length; i++) {
+                 var currentWeatherEl = document.createElement('div'); //create elements for daily forecast, will get appended to parent container and styled as card, will hold current info
+                 var fiveDayWeatherEl= document.createElement('div'); //creates div to style as cards for 5 day and append to its container, style as card
+                 var currentContainerEl = document.getElementById('current-conditions');
+                currentWeatherEl.textContent = data[i].city.name;
+                console.log(data[i].city.name);
+              //   issueTitle.textContent = data[i].title;
+                currentContainerEl.appendChild(currentWeatherEl);
+              //   issueContainer.append(issueTitle);
+              //   //make variable looping icon data out of the returned data
+               } 
+            })
+            
+          
+              
       }
     });
-
-    //make variable for the forecast API requestURL
-var requestUrlForecast = 'api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}'
-//fetch the forecast request URL using the longitude and latitude variables to get the forecast data
 // need to dynamically update HTML by appending elements for the current weather and for the 5 day forecast
 //need to use variables for cities (and states if used?) to store their names in localStorage to persist their data on screen
+//need another fetch to get the icons using the icon codes fetched from the weather
 //need to append buttons with the city names from localStorage?
 }
 //event listener to call getApi function when searchButton element is clicked
