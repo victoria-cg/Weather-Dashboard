@@ -24,7 +24,7 @@ function getApi() {
     })
     .then(function (data) {
       console.log(data);
-      for (var i = 0; i < data.length; i++) {
+      for (var i = 0; i < data.length; i++) { //does this need to be looped here or just loop the cities in storage?
         var latitude = data[i].lat;
         console.log(latitude);
         var longitude = data[i].lon;
@@ -41,17 +41,17 @@ function getApi() {
             })
             .then(function (data) {
               console.log(data);
-               for (var i = 0; i < data.length; i++) {
+               //for (var i = 0; i < data.list.length; i++) {
                  var currentWeatherEl = document.createElement('div'); //create elements for daily forecast, will get appended to parent container and styled as card, will hold current info
                  var fiveDayWeatherEl= document.createElement('div'); //creates div to style as cards for 5 day and append to its container, style as card
                  var currentContainerEl = document.getElementById('current-conditions');
-                currentWeatherEl.textContent = data[i].city.name;
-                console.log(data[i].city.name);
+                currentWeatherEl.textContent = data.city.name;
+                console.log(data.city.name);
               //   issueTitle.textContent = data[i].title;
-                currentContainerEl.appendChild(currentWeatherEl);
+                currentContainerEl.appendChild(currentWeatherEl); //instead of this clean up the code by using object literals
               //   issueContainer.append(issueTitle);
               //   //make variable looping icon data out of the returned data
-               } 
+               //} 
             })
             
           
