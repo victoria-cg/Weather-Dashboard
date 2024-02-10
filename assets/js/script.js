@@ -51,18 +51,41 @@ function getApi() {
               var iconTodayEl = document.createElement('img');
               //set source of iconTodayEl html image element to be the URL contained in UrlIconToday
               iconTodayEl.src = UrlIconToday;
-              
-                 var currentWeatherEl = document.createElement('div'); //create elements for daily forecast, will get appended to parent container and styled as card, will hold current info
-                 var fiveDayWeatherEl= document.createElement('div'); //creates div to style as cards for 5 day and append to its container, style as card
+              //variable to select the div html element with ID of 'current-conditions'
+              //need to style this container div as a card via CSS classes, add attribute of card class to container and style in css
+              var currentContainerEl = document.getElementById('current-conditions');
+              //variable to create h2 element for the name of the current city searched for, will append to currentContainerEl
+              var currentWeatherNameEl = document.createElement('h2'); //create elements for daily forecast, will get appended to parent container and styled as card, will hold current info
+              //sets the text of h2 currentWeatherNameEl to be the name of the current city
+              currentWeatherNameEl.textContent = data.city.name;
+                console.log(data.city.name);
+                //TO DO: Make a day.js h2 for the date
+                //To Do: Make a ul to hold the temp, wind, humidity
+                var currentWeatherListEl = document.createElement('ul');
+                //TO DO: make li for temp, wind, and humidity
+                var currentWeatherTempLi = document.createElement('li');
+                var currentWeatherWindSpeedLi = document.createElement('li');
+                var currentWeatherHumidityLi =document.createElement('li');
+                //Set text content for list items/weather condition info pulled from API data
+                currentWeatherTempLi.textContent = data.list[0].main.temp;
+                console.log(currentWeatherTempLi);
+                currentWeatherWindSpeedLi.textContent = data.list[0].wind.speed;
+                console.log(currentWeatherWindSpeedLi)
+                currentWeatherHumidityLi.textContent = data.list[0].main.humidity;
+                console.log(currentWeatherHumidityLi);
+                //TO DO: append list items to list
+                //TO DO: append list to  current weather container
+
+              currentContainerEl.appendChild(currentWeatherNameEl); //instead of this, option to clean up the code by using object literals
+              currentContainerEl.appendChild(iconTodayEl);
+
+              var fiveDayWeatherEl= document.createElement('div'); //creates div to style as cards for 5 day and append to its container, style as card
                  //create variables to make elements for every piece of information needed
                  //set textContent of each variable equal to the API Data
                  //then append the list of elements by variable name to the parent container
-                 var currentContainerEl = document.getElementById('current-conditions');
-                currentWeatherEl.textContent = data.city.name;
-                console.log(data.city.name);
+                
               //   issueTitle.textContent = data[i].title;
-                currentContainerEl.appendChild(currentWeatherEl); //instead of this clean up the code by using object literals
-                currentContainerEl.appendChild(iconTodayEl);
+                
               //   issueContainer.append(issueTitle);
               //   //make variable looping icon data out of the returned data
                
