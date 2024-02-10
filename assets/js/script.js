@@ -29,29 +29,43 @@ function getApi() {
         console.log(latitude);
         var longitude = data[i].lon;
         console.log(longitude);
-        
         //TO DO FOR SETTNG STORAGE OF CITIES figure out if the city name is available and saveToStorage(data.city)
-        //must add logic mentioned above for asking if city name is available so that non-city names entered in box won't be saved
+        //must add logic mentioned above for asking if city name is available so that non-city names entered in box won't be saved-boolean
+        localStorage.setItem(data.city, JSON.stringify(city)); //sets city name into local storage
+        console.log(localStorage);
         //function below gets forecast for city based on coordinates
-        var requestUrlForecast = 'http://api.openweathermap.org/data/2.5/forecast?lat=' + latitude + '&lon=' + longitude + '&appid=' + apiKey;
-        //fetch the forecast request URL 
+        var requestUrlForecast = 'http://api.openweathermap.org/data/2.5/forecast?lat=' + latitude + '&lon=' + longitude + '&appid=' + apiKey + '&units=Imperial';
+        //fetch the forecast data request URL 
         fetch(requestUrlForecast)
             .then(function (response) {
               return response.json();
             })
             .then(function (data) {
               console.log(data);
-               //for (var i = 0; i < data.list.length; i++) {
+              //VARIABLE FOR ICON CODES NEEDED to get weather icons
+              var iconCodeToday = data.list[0].weather[0].icon;
+              console.log(iconCodeToday);
+              //Variable for icon URL to get icon image
+              var UrlIconToday = 'https://openweathermap.org/img/wn/' + iconCodeToday + '@2x.png'
+              //create image element in which to dynamically insert the icon URL containing the icon code
+              var iconTodayEl = document.createElement('img');
+              //set source of iconTodayEl html image element to be the URL contained in UrlIconToday
+              iconTodayEl.src = UrlIconToday;
+              
                  var currentWeatherEl = document.createElement('div'); //create elements for daily forecast, will get appended to parent container and styled as card, will hold current info
                  var fiveDayWeatherEl= document.createElement('div'); //creates div to style as cards for 5 day and append to its container, style as card
+                 //create variables to make elements for every piece of information needed
+                 //set textContent of each variable equal to the API Data
+                 //then append the list of elements by variable name to the parent container
                  var currentContainerEl = document.getElementById('current-conditions');
                 currentWeatherEl.textContent = data.city.name;
                 console.log(data.city.name);
               //   issueTitle.textContent = data[i].title;
                 currentContainerEl.appendChild(currentWeatherEl); //instead of this clean up the code by using object literals
+                currentContainerEl.appendChild(iconTodayEl);
               //   issueContainer.append(issueTitle);
               //   //make variable looping icon data out of the returned data
-               //} 
+               
             })
             
           
