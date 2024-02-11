@@ -66,47 +66,78 @@ function getApi() {
                 var currentWeatherTempLi = document.createElement('li');
                 var currentWeatherWindSpeedLi = document.createElement('li');
                 var currentWeatherHumidityLi =document.createElement('li');
-                //Set text content for list items/weather condition info pulled from API data
-                currentWeatherTempLi.textContent = data.list[0].main.temp + "° F";
+                //Set text content for list items/weather condition info pulled from API data, added strings to label the data on screen
+                currentWeatherTempLi.textContent = "Temp: " + data.list[0].main.temp + "° F";
                 console.log(currentWeatherTempLi);
-                currentWeatherWindSpeedLi.textContent = data.list[0].wind.speed + "MPH";
+                currentWeatherWindSpeedLi.textContent = "Wind: " + data.list[0].wind.speed + " MPH";
                 console.log(currentWeatherWindSpeedLi)
-                currentWeatherHumidityLi.textContent = data.list[0].main.humidity + "%";
+                currentWeatherHumidityLi.textContent = "Humidity: " + data.list[0].main.humidity + "%";
                 console.log(currentWeatherHumidityLi);
-                //TO DO: append list items to list
-                //TO DO: append list to  current weather container
-
-              currentContainerEl.appendChild(currentWeatherNameEl); //instead of this, option to clean up the code by using object literals
+                
+              //appends city name to container for current weather
+              currentContainerEl.appendChild(currentWeatherNameEl); //instead of this, option to clean up the code by using object literals?
+              //appends current weather icon to container
               currentContainerEl.appendChild(iconTodayEl);
+              //appends unordered list element for current weather
               currentContainerEl.appendChild(currentWeatherListEl);
+              //appends list items of each type of weather data to the unordered list
               currentWeatherListEl.appendChild(currentWeatherTempLi);
               currentWeatherListEl.appendChild(currentWeatherWindSpeedLi);
               currentWeatherListEl.appendChild(currentWeatherHumidityLi);
               
+              //Code to create elements and select data for 5 day forecast below:
 
-              var fiveDayWeatherEl= document.createElement('div'); //creates div to style as cards for 5 day and append to its container, style as card
-                 //create variables to make elements for every piece of information needed
-                 //set textContent of each variable equal to the API Data
-                 //then append the list of elements by variable name to the parent container
-                
-              //   issueTitle.textContent = data[i].title;
-                
-              //   issueContainer.append(issueTitle);
-              //   //make variable looping icon data out of the returned data
+              //for loop selects 5 day forecast data by skipping ahead to the next day starting at array item 8, and counting by 7 to skip over the 3 hour increments of the same day
+              for (var i = 8; i < 35; i+=7) {
+              //selects div to append 5 day forecast children to, will style its children as cards
+              var fiveDayContainerEl= document.getElementById('5-day-forecast'); 
+                 //creates div for cards for each day in 5 day forecast loop
+              var fiveDayCard = document.createElement('div');
+              //sets class of "weather-card" for the new fiveDayCard elements that will be inserted
+              fiveDayCard.setAttribute("class", "weather-card");
+              //select icon for 5 day weather card in API data array, selecting by array index in the loop iterating over the array, [0] inside "weather" array is where 'icon' object is
+              var fiveDayIconCode = data.list[i].weather[0].icon;
+              //create URL to get icon image from API website using the icon code
+              var fiveDayIconUrl = 'https://openweathermap.org/img/wn/' + fiveDayIconCode + '@2x.png'
+              //create img element to store image/icon
+              var fiveDayIconEl = document.createElement('img');
+              //set the source of the image to the URL made above which retrieves the icon
+              fiveDayIconEl.src = fiveDayIconUrl;
+              //create an element to hold the temperature for the 5 day cards
+              var fiveDayTempEl = document.createElement('p');
+              //sets the temperature data from the for loop index number as the text content of the temperature element
+              fiveDayTempEl.textContent = "Temp: " + data.list[i].main.temp + "° F";
+              //same process to select wind for 5 day cards and create element to display that data
+              var fiveDayWindSpeedEl = document.createElement('p');
+              fiveDayWindSpeedEl.textContent = "Wind: " + data.list[i].wind.speed + " MPH";
+              //same process again to select data and create element for the humidity 5 day data
+              var fiveDayHumidityEl = document.createElement('p');
+              fiveDayHumidityEl.textContent = "Humidity: " + data.list[i].main.humidity + "%";
+              //appends weather icon to the card for the first day of the 5 day forecast
+              fiveDayCard.appendChild(fiveDayIconEl);
+              //appends temperature element as a child of the 5 day temperature card
+              fiveDayCard.appendChild(fiveDayTempEl);
+              //appends wind speed element as a child of the 5 day card
+              fiveDayCard.appendChild(fiveDayWindSpeedEl);
+              //appends humidity element as a child of the 5 day card
+              fiveDayCard.appendChild(fiveDayHumidityEl);
+              //appends card elementsfor the 5 day forecast to the 5 day forecast container for the length of the loop
+              fiveDayContainerEl.appendChild(fiveDayCard);
+              }
                
-            })
-            
-          
-              
+            })   
       }
     });
+
+}
+//event listener to call getApi function when searchButton element is clicked
+searchButton.addEventListener('click', getApi);
+// RETRIEVE AND RENDER STORAGE, storage is saved, not dependent on re-running search
+
 // need to dynamically update HTML by appending elements for the current weather and for the 5 day forecast
 //need to use variables for cities (and states if used?) to store their names in localStorage to persist their data on screen
 //need another fetch to get the icons using the icon codes fetched from the weather
 //need to append buttons with the city names from localStorage?
-}
-//event listener to call getApi function when searchButton element is clicked
-searchButton.addEventListener('click', getApi);
 
 //use 5 day weather forecast API, aso the current weather data API for the top widget?:
 
