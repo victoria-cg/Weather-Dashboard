@@ -42,6 +42,12 @@ function getApi() {
             })
             .then(function (data) {
               console.log(data);
+              //function to render current city's most recent/current weather
+              function currentWeather(){
+              //variable to select the div html element with ID of 'current-conditions'
+              var currentContainerEl = document.getElementById('current-conditions');
+              //sets current weather container as empty at the start of a new search so old cities don't persist on screen
+              currentContainerEl.innerText = "";
               //VARIABLE FOR ICON CODES NEEDED to get weather icons
               var iconCodeToday = data.list[0].weather[0].icon;
               console.log(iconCodeToday);
@@ -51,9 +57,6 @@ function getApi() {
               var iconTodayEl = document.createElement('img');
               //set source of iconTodayEl html image element to be the URL contained in UrlIconToday
               iconTodayEl.src = UrlIconToday;
-              //variable to select the div html element with ID of 'current-conditions'
-              //need to style this container div as a card via CSS classes, add attribute of card class to container and style in css
-              var currentContainerEl = document.getElementById('current-conditions');
               //variable to create h2 element for the name of the current city searched for, will append to currentContainerEl
               var currentWeatherNameEl = document.createElement('h2'); //create elements for daily forecast, will get appended to parent container and styled as card, will hold current info
               //sets the text of h2 currentWeatherNameEl to be the name of the current city
@@ -84,13 +87,19 @@ function getApi() {
               currentWeatherListEl.appendChild(currentWeatherTempLi);
               currentWeatherListEl.appendChild(currentWeatherWindSpeedLi);
               currentWeatherListEl.appendChild(currentWeatherHumidityLi);
-              
+              }
+              currentWeather();
               //Code to create elements and select data for 5 day forecast below:
 
               //for loop selects 5 day forecast data by skipping ahead to the next day starting at array item 8, and counting by 7 to skip over the 3 hour increments of the same day
-              for (var i = 8; i < 35; i+=7) {
-              //selects div to append 5 day forecast children to, will style its children as cards
-              var fiveDayContainerEl= document.getElementById('5-day-forecast'); 
+              //create functiion to hold the code for the 5 day forecast
+              function createForecast(){ 
+
+                //selects div to append 5 day forecast children to, will style its children as cards
+                var fiveDayContainerEl= document.getElementById('5-day-forecast');
+                //starts container content as empty string when function runs so that previously searched cities don't persist on screen
+                fiveDayContainerEl.innerText = "";
+                for (var i = 8; i <= 36; i+=7) {
                  //creates div for cards for each day in 5 day forecast loop
               var fiveDayCard = document.createElement('div');
               //sets class of "weather-card" for the new fiveDayCard elements that will be inserted
@@ -124,6 +133,8 @@ function getApi() {
               //appends card elementsfor the 5 day forecast to the 5 day forecast container for the length of the loop
               fiveDayContainerEl.appendChild(fiveDayCard);
               }
+            }
+            createForecast();
                
             })   
       }
