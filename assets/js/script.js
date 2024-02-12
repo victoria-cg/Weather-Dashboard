@@ -4,6 +4,7 @@ var apiKey = 'c0502d3ccf7aaee3e8c3edf82303a125';
 var cityName = document.getElementById('city-name');
 //create variable targeting the search button element
 var searchButton = document.getElementById('search-button');
+var city = cityName.value;
 
 function getApi() {
      //-make a variable for the API call ‘var: city’ to hold user input for city names (see API doc for how to also store state name/abbreviation as a variable, or do I just make a second variable?)
@@ -143,7 +144,26 @@ function getApi() {
 }
 //event listener to call getApi function when searchButton element is clicked
 searchButton.addEventListener('click', getApi);
-// RETRIEVE AND RENDER STORAGE, storage is saved, not dependent on re-running search
+
+// RETRIEVE AND RENDER STORAGE, storage is saved, not dependent on re-running search, will load storage on page load
+function loadStorage(){
+  var savedCities = JSON.parse(localStorage.getItem(city))
+  if (savedCities===null) {
+    localStorage.setItem(city, JSON.stringify([])) //creates array of city names if there were none in storage to retrieve
+    return
+  }
+  //iterate through the array and append the cities in the area to the document as elements
+  console.log(savedCities);
+}
+
+function saveToStorage(newCity){
+// I should stringify if not saving a string
+var savedCities = JSON.parse(localStorage.getItem(city))
+//saved cities is an array because the city names get parsed back into an array by json.parse
+//use push to add the new city to the end of the array
+savedCities.push(newCity)
+}
+loadStorage();
 
 // need to dynamically update HTML by appending elements for the current weather and for the 5 day forecast
 //need to use variables for cities (and states if used?) to store their names in localStorage to persist their data on screen
