@@ -4,12 +4,14 @@ var apiKey = 'c0502d3ccf7aaee3e8c3edf82303a125';
 var cityName = document.getElementById('city-name');
 //create variable targeting the search button element
 var searchButton = document.getElementById('search-button');
-var city = cityName.value;
+var city = [];
+     city [0] = cityName.value;
 
 function getApi() {
      //-make a variable for the API call ‘var: city’ to hold user input for city names (see API doc for how to also store state name/abbreviation as a variable, or do I just make a second variable?)
     //need to get the values of city names entered by user in order to use them in geocoding API, done with 'var city'
      var city = cityName.value;
+    // city [0] = cityName.value;
     // saveToStorage(city);
     console.log(city)
     //variable for the API call to Geocode the city name into coordinates below 
@@ -34,7 +36,7 @@ function getApi() {
         //TO DO FOR SETTNG STORAGE OF CITIES figure out if the city name is available and saveToStorage(data.city)
         //must add logic mentioned above for asking if city name is available so that non-city names entered in box won't be saved-boolean
         //setItem below sets 'city' value into localStorage as a string
-        localStorage.setItem("cityNames", JSON.stringify(city)); //sets city name into local storage
+        saveToStorage(city); //sets city name into local storage
         console.log(localStorage);
         //function below gets forecast for city based on coordinates
         var requestUrlForecast = 'http://api.openweathermap.org/data/2.5/forecast?lat=' + latitude + '&lon=' + longitude + '&appid=' + apiKey + '&units=Imperial';
@@ -154,9 +156,12 @@ function loadStorage(){
     localStorage.setItem("cityNames", JSON.stringify([])) //creates array of city names if there were none in storage to retrieve
     return
   }
+
+  //container is outside of the loop so that we won't get extra containers, set innerText to empty striing to start so that old buttons will clear before loop runs again
+  var savedButtonContainer = document.getElementById('saved-city-buttons');
+  savedButtonContainer.innerText = ""; 
   //iterate through the array and append the cities in the area to the document as elements
   for (var i = 0; i < savedCities.length; i++) {
-    var savedButtonContainer = document.getElementById('saved-city-buttons');
     var savedCityButtonEl = document.createElement('button');
     savedCityButtonEl.textContent = savedCities[i];
     savedButtonContainer.appendChild(savedCityButtonEl);
@@ -164,24 +169,27 @@ function loadStorage(){
   console.log(savedCities);
 }
 
-function saveToStorage(){
-// I should stringify if not saving a string
-var savedCities = JSON.parse(localStorage.getItem("cityNames"))
+
+function saveToStorage(newCity){
+//saved cities starts as empty array so that we can push new information to it
+console.log(newCity);
+var savedCities =[];
+savedCities= localStorage.getItem("cityNames");
 //saved cities is an array because the city names get parsed back into an array by json.parse
-//make savedCities an empty array if nothing was already in storage and value was null, so that you can use .push on the new array
-if(savedCities === null){
-   savedCities = [];
+
+if (savedCities){
+   savedCities = JSON.parse(savedCities);
 };
 console.log("log savedCities")
 console.log(savedCities);
 //use push to add the new city to the end of the array
 
-savedCities.push(city);
+savedCities.push(newCity);
 localStorage.setItem("cityNames", JSON.stringify(savedCities));
 loadStorage();
 }
 
-saveToStorage();
+//saveToStorage();
 
 loadStorage();
 
