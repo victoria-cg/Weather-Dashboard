@@ -10,6 +10,7 @@ function getApi() {
      //-make a variable for the API call ‘var: city’ to hold user input for city names (see API doc for how to also store state name/abbreviation as a variable, or do I just make a second variable?)
     //need to get the values of city names entered by user in order to use them in geocoding API, done with 'var city'
      var city = cityName.value;
+    // saveToStorage(city);
     console.log(city)
     //variable for the API call to Geocode the city name into coordinates below 
     //is it required to add state and country codes too to get geocode API to work?
@@ -32,7 +33,8 @@ function getApi() {
         console.log(longitude);
         //TO DO FOR SETTNG STORAGE OF CITIES figure out if the city name is available and saveToStorage(data.city)
         //must add logic mentioned above for asking if city name is available so that non-city names entered in box won't be saved-boolean
-        localStorage.setItem(data.city, JSON.stringify(city)); //sets city name into local storage
+        //setItem below sets 'city' value into localStorage as a string
+        localStorage.setItem("cityNames", JSON.stringify(city)); //sets city name into local storage
         console.log(localStorage);
         //function below gets forecast for city based on coordinates
         var requestUrlForecast = 'http://api.openweathermap.org/data/2.5/forecast?lat=' + latitude + '&lon=' + longitude + '&appid=' + apiKey + '&units=Imperial';
@@ -147,22 +149,40 @@ searchButton.addEventListener('click', getApi);
 
 // RETRIEVE AND RENDER STORAGE, storage is saved, not dependent on re-running search, will load storage on page load
 function loadStorage(){
-  var savedCities = JSON.parse(localStorage.getItem(city))
+  var savedCities = JSON.parse(localStorage.getItem("cityNames"))
   if (savedCities===null) {
-    localStorage.setItem(city, JSON.stringify([])) //creates array of city names if there were none in storage to retrieve
+    localStorage.setItem("cityNames", JSON.stringify([])) //creates array of city names if there were none in storage to retrieve
     return
   }
   //iterate through the array and append the cities in the area to the document as elements
+  for (var i = 0; i < savedCities.length; i++) {
+    var savedButtonContainer = document.getElementById('saved-city-buttons');
+    var savedCityButtonEl = document.createElement('button');
+    savedCityButtonEl.textContent = savedCities[i];
+    savedButtonContainer.appendChild(savedCityButtonEl);
+  }
   console.log(savedCities);
 }
 
-function saveToStorage(newCity){
+function saveToStorage(){
 // I should stringify if not saving a string
-var savedCities = JSON.parse(localStorage.getItem(city))
+var savedCities = JSON.parse(localStorage.getItem("cityNames"))
 //saved cities is an array because the city names get parsed back into an array by json.parse
+//make savedCities an empty array if nothing was already in storage and value was null, so that you can use .push on the new array
+if(savedCities === null){
+   savedCities = [];
+};
+console.log("log savedCities")
+console.log(savedCities);
 //use push to add the new city to the end of the array
-savedCities.push(newCity)
+
+savedCities.push(city);
+localStorage.setItem("cityNames", JSON.stringify(savedCities));
+loadStorage();
 }
+
+saveToStorage();
+
 loadStorage();
 
 // need to dynamically update HTML by appending elements for the current weather and for the 5 day forecast
@@ -179,5 +199,3 @@ loadStorage();
 //use a for  loop to log/display the data for each city’s data retrieved by the API? Like in example 6.7
 //Dynamically insert the elements for the content that you want to select from the API data array, and then append those to the page. See class activities 6.9 and 6.10
 
-
-//Use localStorage to store the cities already searched for
