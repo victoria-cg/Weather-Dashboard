@@ -3,9 +3,10 @@
 
 <head>
   <meta charset="UTF-8" />
-  <title>Weather Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!--Need to call bootstrap stylesheet here if using-->
+  <title>Weather Dashboard</title>
+  
   <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
 </head>
 
@@ -17,8 +18,9 @@
     </header>
     <!--div container for city search form, button to submit, and dynamic/persistiing buttons for previously searched cities stored in localStorage-->
     <div class="form-container">
-        <input id = 'city-name' type="text" class="form-input" name="city-name" placeholder="Enter city name"/> <!--input is the search box to submit the city name-->
-        <button id="search-button">Search</button> <!--Button is the search button to submit the city name into the form-->
+      <h2>Search for a City</h2>
+      <input id = 'city-name' type="text" class="form-input" name="city-name" placeholder="Enter city name"/> <!--input is the search box to submit the city name-->
+      <button id="search-button">Search</button> <!--Button is the search button to submit the city name into the form-->
     </div>
     <div id="saved-city-buttons"></div>
     <!--Div container for current city name and weather conditions-->

@@ -111,7 +111,7 @@ function getApi() {
               function createForecast(){ 
 
                 //selects div to append 5 day forecast children to, will style its children as cards
-                var fiveDayContainerEl= document.getElementById('5-day-forecast');
+                var fiveDayContainerEl= document.getElementById('five-day-forecast');
                 //starts container content as empty string when function runs so that previously searched cities don't persist on screen
                 fiveDayContainerEl.innerText = "";
                 for (var i = 8; i <= 36; i+=7) {
