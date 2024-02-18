@@ -67,7 +67,16 @@ function getApi() {
               //sets the text of h2 currentWeatherNameEl to be the name of the current city
               currentWeatherNameEl.textContent = data.city.name;
                 console.log(data.city.name);
-                //TO DO: Make a day.js h2 for the date
+                //makes container for h3 of current date
+                var dateContainerEl = document.createElement('h3');
+                //makes variable passing current date from API array and setting it to format of US style short date
+                var currentDate = (new Date(data.list[0].dt_txt)).toLocaleDateString('en-US');
+                //log date to console to test
+                console.log("current date test");
+                console.log(currentDate);
+                //sets the formatted date as the content of the container
+                dateContainerEl.textContent = currentDate;
+               
                 //To Do: Make a ul to hold the temp, wind, humidity
                 var currentWeatherListEl = document.createElement('ul');
                 //TO DO: make li for temp, wind, and humidity
@@ -83,7 +92,9 @@ function getApi() {
                 console.log(currentWeatherHumidityLi);
                 
               //appends city name to container for current weather
-              currentContainerEl.appendChild(currentWeatherNameEl); //instead of this, option to clean up the code by using object literals?
+              currentContainerEl.appendChild(currentWeatherNameEl); 
+              //appends the current date container to the current conditions container
+              currentContainerEl.appendChild(dateContainerEl);
               //appends current weather icon to container
               currentContainerEl.appendChild(iconTodayEl);
               //appends unordered list element for current weather
