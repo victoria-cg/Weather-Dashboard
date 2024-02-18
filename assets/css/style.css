@@ -1,2 +1,32 @@
-/*//make styles for the containers/data: use bootstrap?
-Styles can also be inserted dynamically with the elements that get inserted dynamically, even if vanilla CSS*/
+*{
+    font-family: Arial, Helvetica, sans-serif;
+}
+header{
+    display: flex;
+    justify-content: center;
+    color: white;
+    background-color: midnightblue;
+}
+
+/*formcontainer contains search bar, search button, and search h2*/
+.formcontainer{
+    display: flex;
+}
+
+/*contains card for current conditions*/
+#current-conditions{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-content: center;
+}
+/*Cards for 5 day forecast*/
+#five-day-forecast{
+    display: flex;
+    background-color: slategray;
+}
+/*contains dynamically rendered buttons of saved cities*/
+#saved-city-buttons{
+    display: flex;
+}
