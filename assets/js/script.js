@@ -4,8 +4,7 @@ var apiKey = 'c0502d3ccf7aaee3e8c3edf82303a125';
 var cityName = document.getElementById('city-name');
 //create variable targeting the search button element
 var searchButton = document.getElementById('search-button');
-var city = [];
-     city [0] = cityName.value;
+//var city = cityName.value;
 
 function getApi() {
      //-make a variable for the API call ‘var: city’ to hold user input for city names (see API doc for how to also store state name/abbreviation as a variable, or do I just make a second variable?)
@@ -128,6 +127,12 @@ function getApi() {
               var fiveDayIconEl = document.createElement('img');
               //set the source of the image to the URL made above which retrieves the icon
               fiveDayIconEl.src = fiveDayIconUrl;
+              //create element for 5 day forecast date, will append to fiveDayCard
+              var forecastDateEl = document.createElement('h3')
+              //get date data and format for all forecast cards 
+              var forecastDate = (new Date(data.list[i].dt_txt)).toLocaleDateString('en-US');
+              //set text content for forecast date element using data retrieved
+              forecastDateEl.textContent = forecastDate;
               //create an element to hold the temperature for the 5 day cards
               var fiveDayTempEl = document.createElement('p');
               //sets the temperature data from the for loop index number as the text content of the temperature element
@@ -138,6 +143,8 @@ function getApi() {
               //same process again to select data and create element for the humidity 5 day data
               var fiveDayHumidityEl = document.createElement('p');
               fiveDayHumidityEl.textContent = "Humidity: " + data.list[i].main.humidity + "%";
+              //TODO Append the date to the 5 day forecast card
+              fiveDayCard.appendChild(forecastDateEl);
               //appends weather icon to the card for the first day of the 5 day forecast
               fiveDayCard.appendChild(fiveDayIconEl);
               //appends temperature element as a child of the 5 day temperature card
@@ -178,6 +185,9 @@ function loadStorage(){
     savedButtonContainer.appendChild(savedCityButtonEl);
   }
   console.log(savedCities);
+  //need to make event listener that runs getAPI function with saved city names: may need to make new version of function to pass correct city name in this function
+  //savedCityButtonEl.addEventListener('click', function(){
+    //getApi(savedCityButtonEl.textContent);});
 }
 
 
