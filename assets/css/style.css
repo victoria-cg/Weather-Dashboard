@@ -21,13 +21,19 @@ header{
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    flex-direction: column;
+    flex-direction: row;
     align-content: center;
     border-style: solid;
+    order: 2;
 }
 
 currentContainerEl{
     border-style: solid;
+}
+
+#current-conditions ul{
+    display: flex;
+    flex-direction: column;
 }
 /*styles list of current conditions with no bullets*/
 #current-conditions ul li{
