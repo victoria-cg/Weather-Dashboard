@@ -184,8 +184,8 @@ function loadStorage(){
     savedCityButtonEl.textContent = savedCities[i];
     savedButtonContainer.appendChild(savedCityButtonEl);
   
-    savedCityButtonEl.addEventListener('click', function(){
-      getApi();});
+    // savedCityButtonEl.addEventListener('click', function(){
+    //   getApi();});
   }
   console.log(savedCities);
   //need to make event listener that runs getAPI function with saved city names: may need to make new version of function to pass correct city name in this function

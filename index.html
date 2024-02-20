@@ -16,6 +16,8 @@
     <header>
         <h1>Weather Dashboard</h1>
     </header>
+    <!--Aside section holds the search bar, its title, and dynamically rendered city buttons in 1 box for styling-->
+    <section id="aside">
     <!--div container for city search form, button to submit, and dynamic/persistiing buttons for previously searched cities stored in localStorage-->
     <div class="form-container">
       <h2>Search for a City</h2>
@@ -23,10 +25,14 @@
       <button id="search-button">Search</button> <!--Button is the search button to submit the city name into the form-->
     </div>
     <div id="saved-city-buttons"></div>
+    </section>
+    <!--weather rows section holds the forecasts for CSS styling as one box-->
+    <section id="weather-rows">
     <!--Div container for current city name and weather conditions-->
     <div id="current-conditions"></div>
     <!--Div container for 5 day forecast of selected city-->
     <div id="five-day-forecast"></div>
+  </section>
     <!--need to call bootstrap script tag here if using-->
     <script type="text/javascript" src="./assets/js/script.js"></script>
 </body>

@@ -16,13 +16,18 @@ header{
     flex-wrap: wrap;
 }
 
+#weather-rows{
+    display: inline-flex;
+    flex-direction: column-reverse;
+}
 /*contains card for current conditions*/
 #current-conditions{
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    flex-direction: row;
+    flex-direction: column;
     align-content: center;
+    align-items: center;
     border-style: solid;
     order: 2;
 }
@@ -46,12 +51,28 @@ currentContainerEl{
     flex-wrap: wrap;
     justify-content: space-around;
     color: white;
+    
+}
+
+.weather-card{
+    margin: 4px;
     background-color: slategray;
+    align-items: center;
+    justify-content: center;
+}
+
+#aside{
+    display: inline-flex;
+    flex-direction: column;
+}
+
+#search-button{
+    border-style: none;
+    background-color: midnightblue;
+    color: white;
 }
 /*contains dynamically rendered buttons of saved cities*/
 #saved-city-buttons{
     display: inline-flex;
     flex-direction: column;
-    order: 1;
-
 }
