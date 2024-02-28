@@ -16,7 +16,7 @@ function getApi() {
     //variable for the API call to Geocode the city name into coordinates below 
     //is it required to add state and country codes too to get geocode API to work?
     //limit parameter in request URL is set to =1 to only return 1 city by the requested name
-    var requestUrlGeocode = 'http://api.openweathermap.org/geo/1.0/direct?q=' + city + '&limit=1&appid=' + apiKey;
+    var requestUrlGeocode = 'https://api.openweathermap.org/geo/1.0/direct?q=' + city + '&limit=1&appid=' + apiKey;
 
 //function to request geocode data for city name, parse data from returned json 
 //function then does a for loop to turn the latitude and longitude data in the array into variables that the next API call can use to fetch the weather by coordinates
@@ -38,7 +38,7 @@ function getApi() {
         saveToStorage(city); //sets city name into local storage
         console.log(localStorage);
         //function below gets forecast for city based on coordinates
-        var requestUrlForecast = 'http://api.openweathermap.org/data/2.5/forecast?lat=' + latitude + '&lon=' + longitude + '&appid=' + apiKey + '&units=Imperial';
+        var requestUrlForecast = 'https://api.openweathermap.org/data/2.5/forecast?lat=' + latitude + '&lon=' + longitude + '&appid=' + apiKey + '&units=Imperial';
         //fetch the forecast data request URL 
         fetch(requestUrlForecast)
             .then(function (response) {
