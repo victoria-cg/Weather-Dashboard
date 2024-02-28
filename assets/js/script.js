@@ -183,13 +183,20 @@ function loadStorage(){
     var savedCityButtonEl = document.createElement('button');
     savedCityButtonEl.textContent = savedCities[i];
     savedButtonContainer.appendChild(savedCityButtonEl);
-  
-    // savedCityButtonEl.addEventListener('click', function(){
-    //   getApi();});
-  }
-  console.log(savedCities);
+
+//function to make new value for cityName to use saved city name from storage in getApi( ) 
+//Code below is commented out because it is broken/somehow created and infinite loop of saved city buttons
+// function changeCityName(cityName){
+//   var result = cityName=savedCities[i];
+//   return result;
+}
+// var resultCityName = changeCityName(cityName);
+// //function below to render weather when saved city button is clicked:
+//     savedCityButtonEl.addEventListener('click', getApi(resultCityName));
+//   }
+//   console.log(savedCities);
   //need to make event listener that runs getAPI function with saved city names: may need to make new version of function to pass correct city name in this function
-  return
+  //return
 }
 
 
@@ -216,17 +223,5 @@ loadStorage();
 
 loadStorage();
 
-// need to dynamically update HTML by appending elements for the current weather and for the 5 day forecast
-//need to use variables for cities (and states if used?) to store their names in localStorage to persist their data on screen
-//need another fetch to get the icons using the icon codes fetched from the weather
-//need to append buttons with the city names from localStorage?
 
-//use 5 day weather forecast API, aso the current weather data API for the top widget?:
-
-//*pass ‘var city’ into geocoding API in order to get coordinates, then make coordinates variable to pass the coordinates data into the forecast API?
-//-make a queryURL variable to store the modified API URL so that it can be passed into ‘fetch’ later
-//-will need to modify the base API URL with the parameters it has placeholders for: use the ‘current weather data’ base URL, concatenate the variables for their data, see blog post example
-//-run ‘fetch(queryURL) to fetch the data from the URL variable with its modified parameters we just made
-//use a for  loop to log/display the data for each city’s data retrieved by the API? Like in example 6.7
-//Dynamically insert the elements for the content that you want to select from the API data array, and then append those to the page. See class activities 6.9 and 6.10
 
